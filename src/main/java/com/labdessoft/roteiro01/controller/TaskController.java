@@ -1,5 +1,6 @@
 package com.labdessoft.roteiro01.controller;
 
+import com.labdessoft.roteiro01.dto.TaskCreateDTO;
 import com.labdessoft.roteiro01.entity.Task;
 import com.labdessoft.roteiro01.service.TaskService;
 
@@ -43,9 +44,9 @@ public class TaskController {
 
     @PostMapping()
     @Operation(summary = "Cria uma nova tarefa")
-    public ResponseEntity<Task> create(@RequestBody Task task) {
+    public ResponseEntity<Task> create(@RequestBody TaskCreateDTO taskDto) {
         try {
-            Task taskCriada = taskService.create(task);
+            Task taskCriada = taskService.create(taskDto.getDescricao());
             return new ResponseEntity<>(taskCriada, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,7 +54,7 @@ public class TaskController {
     }
 
     @PatchMapping("/{id}")
-    @Operation(summary = "Marca a tarefa especificada como concluída")
+    @Operation(summary = "Marca a tarefa, cuja ID foi passado, como concluída")
     public ResponseEntity<Task> marcarTarefaComoConcluida(@PathVariable Long id) {
         try {
             Task updatedTask = taskService.marcarTarefaComoConcluida(id);

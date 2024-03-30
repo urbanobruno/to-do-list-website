@@ -23,11 +23,12 @@ public class TaskService {
     }
 
     @Operation(summary = "Cria uma nova tarefa")
-    public Task create(Task task) {
-        return taskRepository.save(task);
+    public Task create(String descricao) {
+        Task novaTask = new Task(descricao);
+        return taskRepository.save(novaTask);
     }
 
-    @Operation(summary = "Marca uma tarefa como concluída")
+    @Operation(summary = "Marca uma tarefa, cuja ID foi passada, como concluída")
     public Task marcarTarefaComoConcluida(Long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o ID: " + id));

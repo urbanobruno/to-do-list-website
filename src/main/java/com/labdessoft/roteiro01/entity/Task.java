@@ -31,6 +31,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
+        this.completed = false;
     }
 
     @Override
