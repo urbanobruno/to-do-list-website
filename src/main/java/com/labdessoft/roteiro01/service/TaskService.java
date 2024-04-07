@@ -36,8 +36,6 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    // Metodo marcar como concluida
-
     @Operation(summary = "Deleta a tarefa de acordo com o ID passado")
     public void delete(Long id) {
         taskRepository.deleteById(id);
