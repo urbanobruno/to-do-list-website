@@ -27,6 +27,8 @@ public class Task {
     @Size(min = 10, message = "Descrição da tarefa deve possuir pelo menos 10 caracteres")
     private String description;
     
+    private TaskPriorityEnum priority;
+
     private Boolean completed;
 
     public Task(String description) {
