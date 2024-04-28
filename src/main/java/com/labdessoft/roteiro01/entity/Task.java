@@ -77,9 +77,49 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task [id=" + id + ", description=" + description + ", completed=" + completed + "]";
+        String status = calculateStatus();
+        return String.format("Task [id=%d, description=%s, priority=%s, type=%s, status=%s]",
+                id, description, priority, getTypeDescription(type), status);
+    }
+    
+    private String getTypeDescription(TaskTypeEnum type) {
+        switch (type) {
+            case DATA:
+                return "Data";
+            case PRAZO:
+                return "Prazo";
+            default:
+                return "Livre";
+        }
+    }
+    
+    private String calculateStatus() {
+        if (completed) {
+            return "Concluída";
+        }
+        LocalDate currentDate = LocalDate.now();
+        long daysLate;
+        switch (type) {
+            case DATA:
+                if (plannedDate != null) {
+                    daysLate = ChronoUnit.DAYS.between(plannedDate, currentDate);
+                    return plannedDate.isBefore(currentDate) ? daysLate + " dias de atraso" : "Prevista";
+                }
+                break;
+            case PRAZO:
+                if (plannedDays != null) {
+                    LocalDate dueDate = creationDate.plusDays(plannedDays);
+                    daysLate = ChronoUnit.DAYS.between(dueDate, currentDate);
+                    return dueDate.isBefore(currentDate) ? daysLate + " dias de atraso" : "Prevista";
+                }
+                break;
+            case LIVRE:
+                return "Prevista";
+        }
+        return "Prevista";
     }
 
+    // Talvez chamar quando for enviar as tarefas para o frontend (checar)
     public void diminuirDiasPrazo() {
         LocalDate currentDate = LocalDate.now();
 
