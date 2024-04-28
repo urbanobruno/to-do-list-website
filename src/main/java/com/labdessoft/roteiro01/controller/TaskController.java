@@ -1,6 +1,8 @@
 package com.labdessoft.roteiro01.controller;
 
 import com.labdessoft.roteiro01.dto.TaskCreateDTO;
+import com.labdessoft.roteiro01.dto.TaskCreateDataDTO;
+import com.labdessoft.roteiro01.dto.TaskCreatePrazoDTO;
 import com.labdessoft.roteiro01.entity.Task;
 import com.labdessoft.roteiro01.service.TaskService;
 
@@ -43,10 +45,30 @@ public class TaskController {
     }
 
     @PostMapping()
-    @Operation(summary = "Cria uma nova tarefa")
+    @Operation(summary = "Cria uma nova tarefa passando somente a descrição")
     public ResponseEntity<Task> create(@RequestBody TaskCreateDTO taskDto) {
         try {
             Task taskCriada = taskService.create(taskDto.getDescricao());
+            return new ResponseEntity<>(taskCriada, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/create/data")
+    public ResponseEntity<Task> createDataTask(@RequestBody TaskCreateDataDTO taskDto) {
+        try {
+            Task taskCriada = taskService.createDataTask(taskDto);
+            return new ResponseEntity<>(taskCriada, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/create/prazo")
+    public ResponseEntity<Task> createPrazoTask(@RequestBody TaskCreatePrazoDTO taskDto) {
+        try {
+            Task taskCriada = taskService.createPrazoTask(taskDto);
             return new ResponseEntity<>(taskCriada, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
