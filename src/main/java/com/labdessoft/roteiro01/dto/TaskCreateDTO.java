@@ -9,6 +9,6 @@ import lombok.Setter;
 public class TaskCreateDTO {
 
     @Size(min = 10, message = "Descrição da tarefa deve possuir pelo menos 10 caracteres")
-    private String descricao;
+    private String description;
 
 }

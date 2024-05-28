@@ -48,7 +48,7 @@ public class TaskController {
     @Operation(summary = "Cria uma nova tarefa passando somente a descrição")
     public ResponseEntity<Task> create(@RequestBody TaskCreateDTO taskDto) {
         try {
-            Task taskCriada = taskService.create(taskDto.getDescricao());
+            Task taskCriada = taskService.create(taskDto.getDescription());
             return new ResponseEntity<>(taskCriada, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

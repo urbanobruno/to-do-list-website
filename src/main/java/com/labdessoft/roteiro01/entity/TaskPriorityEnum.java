@@ -4,7 +4,8 @@ public enum TaskPriorityEnum {
 
     ALTA("Alta"),
     MEDIA("Média"),
-    BAIXA("Baixa");
+    BAIXA("Baixa"),
+    AUSENTE("Ausente");
 
     private final String descricao;
 
