@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function FormData() {
+function FormData({ addTarefa }) {
   const [descricao, setDescricao] = useState("");
   const [data, setData] = useState("");
   const [prioridade, setPrioridade] = useState("AUSENTE");
@@ -27,6 +27,8 @@ function FormData() {
         setDescricao("");
         setData("");
         setPrioridade("AUSENTE");
+        const data = await response.json();
+        addTarefa(data);
 
       } else {
         console.error("Erro ao criar a Tarefa:", response.statusText);

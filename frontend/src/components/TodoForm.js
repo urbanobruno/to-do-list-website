@@ -5,18 +5,18 @@ import FormPrazo from "./forms/formPrazo";
 import './TodoForm.css';
 
 
-function TodoForm() {
+function TodoForm({ addTarefa }) {
 
   const [formType, setFormType] = useState("normal");
 
   const renderForm = () => {
     switch (formType) {
       case "normal":
-        return <div><FormNormal /></div>;
+        return <div><FormNormal addTarefa={addTarefa}/></div>;
       case "prazo":
-        return <div><FormPrazo /></div>;
+        return <div><FormPrazo addTarefa={addTarefa}/></div>;
       case "data":
-        return <div><FormData /></div>;
+        return <div><FormData addTarefa={addTarefa}/></div>;
       default:
         return null;
     }

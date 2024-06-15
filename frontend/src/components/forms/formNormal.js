@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function FormNormal() {
+function FormNormal({ addTarefa }) {
   const [descricao, setDescricao] = useState("");
 
   const handleSubmit = async (e) => {
@@ -21,6 +21,8 @@ function FormNormal() {
 
       if (response.ok) {
         setDescricao("");
+        const data = await response.json();
+        addTarefa(data);
 
       } else {
         console.error("Erro ao criar o Tarefa:", response.statusText);

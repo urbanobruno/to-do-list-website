@@ -2,27 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-export const TodoList = () => {
-  const [tarefas, setTarefas] = useState([]);
-
-  useEffect(() => {
-    fetchTarefas();
-  }, []);
-
-  const fetchTarefas = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/task");
-      if (response.ok) {
-        const data = await response.json();
-        setTarefas(data);
-      } else {
-        console.error("Erro ao buscar tarefas:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Erro ao buscar tarefas:", error);
-    }
-  };
-
+export const TodoList = ({ tarefas, setTarefas }) => {
   const handleExcluirTarefa = async (id) => {
     try {
       const response = await fetch(`http://localhost:8080/api/task/${id}`, {
@@ -44,8 +24,9 @@ export const TodoList = () => {
       <h2>Suas Tarefas</h2>
       <ul>
         {tarefas.map((tarefa) => (
-          <li key={tarefa.id} className="tarefa-item">
-            <span>{tarefa.description}</span>
+          <li key={tarefa.id} className="tarefa-item margin-fix">
+            <span >{tarefa.description}</span>
+
             <button onClick={() => handleExcluirTarefa(tarefa.id)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
