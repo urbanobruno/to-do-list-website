@@ -1,3 +1,1 @@
-Projeto To Do List - Laboratório de Desenvolvimento de Software
-
-Aluno: Bruno Rocha C. Urbano
+Projeto To Do List - Feito na matéria de Laboratório de Desenvolvimento de Software
